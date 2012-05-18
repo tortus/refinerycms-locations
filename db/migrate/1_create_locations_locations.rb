@@ -4,7 +4,7 @@ class CreateLocationsLocations < ActiveRecord::Migration
     create_table :refinery_locations do |t|
       t.integer :image_id
       t.string :name
-      t.string :street
+      t.string :address
       t.string :city
       t.string :state
       t.string :zip

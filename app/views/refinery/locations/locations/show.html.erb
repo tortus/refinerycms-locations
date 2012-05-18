@@ -1,0 +1,93 @@
+<% content_for :body_content_title do %>
+  <%= @location.name %>
+<% end %>
+
+<% content_for :body_content_left do %>
+  <section>
+    <h1>Image</h1>
+    <p>
+      <%= image_fu @location.image, nil %>
+    </p>
+  </section>
+  <section>
+    <h1>Name</h1>
+    <p>
+      <%=raw @location.name %>
+    </p>
+  </section>
+  <section>
+    <h1>Street</h1>
+    <p>
+      <%=raw @location.street %>
+    </p>
+  </section>
+  <section>
+    <h1>City</h1>
+    <p>
+      <%=raw @location.city %>
+    </p>
+  </section>
+  <section>
+    <h1>State</h1>
+    <p>
+      <%=raw @location.state %>
+    </p>
+  </section>
+  <section>
+    <h1>Zip</h1>
+    <p>
+      <%=raw @location.zip %>
+    </p>
+  </section>
+  <section>
+    <h1>Phone</h1>
+    <p>
+      <%=raw @location.phone %>
+    </p>
+  </section>
+  <section>
+    <h1>Description</h1>
+    <p>
+      <%=raw @location.description %>
+    </p>
+  </section>
+  <section>
+    <h1>Map Code</h1>
+    <p>
+      <%=raw @location.map_code %>
+    </p>
+  </section>
+  <section>
+    <h1>Directions Code</h1>
+    <p>
+      <%=raw @location.directions_code %>
+    </p>
+  </section>
+  <section>
+    <h1>Hidden</h1>
+    <p>
+      <%=raw @location.hidden %>
+    </p>
+  </section>
+  <section>
+    <h1>Slug</h1>
+    <p>
+      <%=raw @location.slug %>
+    </p>
+  </section>
+<% end %>
+
+<% content_for :body_content_right do %>
+  <aside>
+    <h2><%= t('.other') %></h2>
+    <ul id="locations">
+      <% @locations.each do |location| %>
+        <li>
+          <%= link_to location.name, refinery.locations_location_path(location) %>
+        </li>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+
+<%= render '/refinery/content_page' %>

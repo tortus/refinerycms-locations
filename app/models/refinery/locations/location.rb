@@ -52,6 +52,7 @@ module Refinery
       def destroy_page
         page.destroy! if page
       end
+
     end
   end
 end

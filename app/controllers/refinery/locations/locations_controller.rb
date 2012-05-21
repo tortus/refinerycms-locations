@@ -3,9 +3,9 @@ module Refinery
     class LocationsController < ::ApplicationController
 
       before_filter :find_all_locations
-      before_filter :find_page
 
       def index
+        @page = ::Refinery::Page.where(:link_url => "/locations").first
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @location in the line below:
         present(@page)
@@ -13,6 +13,7 @@ module Refinery
 
       def show
         @location = Location.find(params[:id])
+        @page = @location.page
 
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @location in the line below:
@@ -23,10 +24,6 @@ module Refinery
 
       def find_all_locations
         @locations = Location.order('position ASC')
-      end
-
-      def find_page
-        @page = ::Refinery::Page.where(:link_url => "/locations").first
       end
 
     end

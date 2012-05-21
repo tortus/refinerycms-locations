@@ -18,6 +18,40 @@ module Refinery
       def self.live; active; end
       def self.by_position; order("position ASC"); end
       def self.by_name; order("name ASC"); end
+      
+      def self.url
+        "/locations"
+      end
+      def self.page
+        ::Refinery::Page.where(:link_url => url).first
+      end
+      
+      def url
+        "#{self.class.url}/#{friendly_id}"
+      end
+      def page
+        @page ||= ::Refinery::Page.where(:link_url => url).first
+      end
+      
+      after_create :create_page
+      after_destroy :destroy_page
+
+      def create_page
+        if parent = self.class.page
+          self.class.transaction do
+            page = parent.children.create!(
+              :title => name,
+              :link_url => url,
+              :deletable => false,
+              :menu_match => "^#{url}(\/|\/.+?|)$"
+            )
+          end
+        end
+      end
+      
+      def destroy_page
+        page.destroy! if page
+      end
     end
   end
 end

@@ -14,6 +14,23 @@ module Refinery
 
       belongs_to :image, :class_name => '::Refinery::Image'
       
+      # meta
+      def title; name; end
+      
+      def city_state_zip
+        "#{city}, #{state} #{zip}"
+      end
+      
+      # returns phone number with all punctuation removed and "+1" prepended
+      def international_phone
+        phone.gsub(/[^\d]/, "").prepend('+1')
+      end
+      
+      # returns phone number with all extra punctuation from the CMS
+      def formatted_phone
+        phone
+      end
+      
       def self.active; where(:hidden => false); end
       def self.live; active; end
       def self.by_position; order("position ASC"); end

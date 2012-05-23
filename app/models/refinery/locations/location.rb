@@ -4,11 +4,13 @@ module Refinery
       extend FriendlyId
       self.table_name = 'refinery_locations'
 
-      attr_accessible :name, :image_id, :address, :city, :state, :zip,
-      :phone, :description, :map_code, :directions_code, :position, :hidden
+      attr_accessible :name, :image_id, :address, :address_2, :city, :state,
+        :zip, :phone, :description, :map_code, :directions_code, :position, :hidden
 
       friendly_id :name, :use => [:slugged]
-      acts_as_indexed :fields => [:name, :address, :city, :state, :zip, :phone, :description]
+      acts_as_indexed :fields => [
+        :name, :address, :address_2, :city, :state, :zip, :phone, :description
+      ]
 
       validates :name, :presence => true, :uniqueness => true
 

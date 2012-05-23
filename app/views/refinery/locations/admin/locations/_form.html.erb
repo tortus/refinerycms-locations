@@ -73,7 +73,11 @@
   </div>
   
   <div class='field'>
-    <%= f.label :directions_code %>
+    <div class='label_with_help'>
+      <%= f.label :directions_code %>
+      <%= refinery_help_tag 'Optional. Insert embed code for any widgets you want to appear below the map here.' %>
+    </div>
+      
     <%= f.text_area :directions_code, :class => 'widest', :rows => 5 %>
   </div>
   

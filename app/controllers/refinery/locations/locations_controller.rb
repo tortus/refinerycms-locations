@@ -23,7 +23,7 @@ module Refinery
     protected
 
       def find_all_locations
-        @locations = Location.order('position ASC')
+        @locations = Location.active.by_position
       end
 
     end

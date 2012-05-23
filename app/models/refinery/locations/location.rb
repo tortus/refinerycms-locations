@@ -82,7 +82,7 @@ module Refinery
       def create_page
         self.class.transaction do
           if parent = self.class.page
-            page = parent.children.create!(
+            @page = parent.children.create!(
               :title => name,
               :link_url => url,
               :deletable => false,

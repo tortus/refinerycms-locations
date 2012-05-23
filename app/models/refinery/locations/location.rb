@@ -56,8 +56,8 @@ module Refinery
       def url
         "#{self.class.url}/#{friendly_id}"
       end
-
-      # Returns the previous url prior to any attribute assignments
+      
+      # Returns url of location prior to any attribute changes
       def url_was
         "#{self.class.url}/#{slug_was}"
       end
@@ -71,24 +71,21 @@ module Refinery
         super
       end
 
-      after_create :create_page
-      after_destroy :destroy_page
+      before_create :create_page
+      before_destroy :destroy_page
 
-      before_update :remember_page
-      after_update :update_page
+      before_update :update_page
 
     private
 
       def create_page
-        self.class.transaction do
-          if parent = self.class.page
-            @page = parent.children.create!(
-              :title => name,
-              :link_url => url,
-              :deletable => false,
-              :menu_match => "^#{url}(\/|\/.+?|)$"
-            )
-          end
+        if parent = self.class.page
+          @page = parent.children.create!(
+            :title => name,
+            :link_url => url,
+            :deletable => false,
+            :menu_match => "^#{url}(\/|\/.+?|)$"
+          )
         end
       end
 
@@ -96,14 +93,9 @@ module Refinery
         page.destroy! if page
       end
 
-      def remember_page
-        @previous_page = ::Refinery::Page.where(:link_url => url_was).first
-        @page = nil
-      end
-
       def update_page
-        if @previous_page
-          @previous_page.update_attributes(
+        if @page ||= ::Refinery::Page.where(:link_url => url_was).first
+          @page.update_attributes(
             :title => name,
             :link_url => url,
             :menu_match => "^#{url}(\/|\/.+?|)$"

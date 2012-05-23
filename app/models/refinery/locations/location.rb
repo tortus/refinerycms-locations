@@ -17,7 +17,15 @@ module Refinery
       belongs_to :image, :class_name => '::Refinery::Image'
 
       # meta
-      def title; name; end
+      def title
+        name
+      end
+      def meta_description
+        page.meta_description if page
+      end
+      def meta_keywords
+        page.meta_keywords if page
+      end
 
       def city_state_zip
         "#{city}, #{state} #{zip}"

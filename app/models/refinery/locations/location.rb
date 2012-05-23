@@ -54,6 +54,8 @@ module Refinery
       
       after_create :create_page
       after_destroy :destroy_page
+      
+    private
 
       def create_page
         if parent = self.class.page

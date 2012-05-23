@@ -26,7 +26,8 @@ en:
       'refinery/locations/location':
         image: Image
         name: Name
-        street: Street
+        address: Address
+        address_2: Suite / Floor
         city: City
         state: State
         zip: Zip
@@ -35,4 +36,3 @@ en:
         map_code: Map Code
         directions_code: Directions Code
         hidden: Hidden
-        slug: Slug

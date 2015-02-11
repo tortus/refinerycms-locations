@@ -7,7 +7,7 @@ Refinery::Core::Engine.routes.append do
 
   # Admin routes
   namespace :locations, :path => '' do
-    namespace :admin, :path => 'refinery' do
+    namespace :admin, :path => Refinery::Core.backend_route do
       resources :locations, :except => :show do
         collection do
           post :update_positions

@@ -41,10 +41,10 @@ module Refinery
         phone
       end
 
-      def self.active; where(:hidden => false); end
-      def self.live; active; end
-      def self.by_position; order("position ASC"); end
-      def self.by_name; order("name ASC"); end
+      scope :active,      lambda { where(:hidden => false) }
+      scope :live,        lambda { active }
+      scope :by_position, lambda { order("position ASC") }
+      scope :by_name,     lambda { order("name ASC") }
 
       def self.url
         "/locations"
@@ -56,7 +56,7 @@ module Refinery
       def url
         "#{self.class.url}/#{friendly_id}"
       end
-      
+
       # Returns url of location prior to any attribute changes
       def url_was
         "#{self.class.url}/#{slug_was}"

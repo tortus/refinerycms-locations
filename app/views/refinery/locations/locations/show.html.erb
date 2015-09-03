@@ -3,7 +3,8 @@
 <% end %>
 
 <% content_for :body_content_left do %>
-  <section>
+  <div itemprop="photo" itemscope itemtype="http://schema.org/ImageObject">
+  <section itemprop="image" itemscope itemtype="">
     <h1>Image</h1>
     <p>
       <%= image_fu @location.image, nil %>
@@ -12,9 +13,10 @@
   <section>
     <h1>Name</h1>
     <p>
-      <%=raw @location.name %>
+      <span itemprop="name"><%=raw @location.name %></span>
     </p>
   </section>
+  <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
   <section>
     <h1>Address</h1>
     <p>

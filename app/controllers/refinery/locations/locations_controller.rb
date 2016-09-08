@@ -12,7 +12,7 @@ module Refinery
       end
 
       def show
-        @location = Location.find(params[:id])
+        @location = Location.friendly.find(params[:id])
         @page = @location.page
 
         # you can use meta fields from your model instead (e.g. browser_title)
